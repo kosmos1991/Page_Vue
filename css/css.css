@@ -1,0 +1,152 @@
+@charset "utf-8";
+
+/* 通用设置 */
+
+html,
+body {
+	font-family: "微软雅黑"
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	list-style: none;
+}
+
+.clear {
+	clear: both;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+}
+
+
+/* 菜单栏 */
+
+#nav {}
+
+#nav li {
+	font-size: 20px;
+	margin: 5px 0;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+
+#nav li.active,
+#nav li:hover {
+	color: #fff;
+	background: #ed4040;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+
+/* 文章  */
+
+#news {
+	margin: 10px;
+}
+
+.article {
+	margin-top: 10px;
+	padding: 0 10px 10px;
+	border-bottom: 1px solid #e2e2e2;
+	display: flex;
+}
+
+.article .thumbnail {
+	float: left;
+	max-width: 30%;
+	max-height: 100px;
+	margin-right: 15px;
+}
+
+.article .thumbnail img {
+	width: 100%;
+	height: 100%;
+}
+
+.article .ps {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.article .tit a {
+	font-weight: bold;
+	color: #000;
+}
+
+.article .tit a:hover {
+	color: #999;
+}
+
+.article .dec {
+	margin-top: 15px;
+	font-size: 14px;
+}
+
+.article .tag {
+	color: #eee;
+	margin-right: 10px;
+	padding: 1px 2px;
+	border: 1px solid #eee;
+}
+
+.tag_新闻 {
+	border-color: #87a5b5!important;
+	color: #87a5b5!important;
+}
+
+.tag_财经 {
+	border-color: #b5743a!important;
+	color: #b5743a!important;
+}
+
+.tag_娱乐 {
+	border-color: #b46aff!important;
+	color: #b46aff!important;
+}
+
+.tag_体育 {
+	border-color: #55c167!important;
+	color: #55c167!important;
+}
+
+.tag_推荐 {
+	border-color: #41baad!important;
+	color: #41baad!important;
+}
+
+.tag_科技 {
+	border-color: #60a3f5!important;
+	color: #60a3f5!important
+}
+
+.tag_汽车 {
+	border-color: #539db8!important;
+	color: #539db8!important
+}
+
+.source_img img {
+	height: 20px;
+	width: auto;
+	border-radius: 50%;
+}
+
+.source_tit,
+.dec span {
+	color: #777;
+}
+
+.dec span {
+	float: right;
+	margin-left: 10px;
+}

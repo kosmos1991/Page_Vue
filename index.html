@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>使用vue做一个单页面</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="//static.runoob.com/images/favicon.ico" mce_href="//static.runoob.com/images/favicon.ico" type="image/x-icon">
+		<link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/css.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row" id="news">
+				<ul class="col-sm-2" id="nav">
+					<li v-for="(item,index) in tabs" :class="{active:index==ins}" @click="tab(index)">{{item}}</li>
+				</ul>
+				<div class="col-md-10 col-lg-9">
+					<div id="news">
+						<div v-for="site in sites" class="article" v-if="site.title != null">
+							<a v-bind:href="site.link" class="thumbnail" v-if="site.picInfo.length > 0">
+								<img v-bind:src="site.picInfo[0].url">
+							</a>
+							<div class="ps">
+								<div class="tit">
+									<a v-bind:href="site.link">{{ site.title }}</a>
+								</div>
+								<div class="dec">
+									<a class="tag" v-bind:class="'tag_'+site.category" v-if="ins == 0">{{site.category}}</a>
+									<template v-if="site.source != null">
+										<template v-if="site.source.indexOf('新华') > -1">
+											<a class="source_img" target="_blank" href="//www.xinhuanet.com/"><img src="//www.xinhuanet.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.xinhuanet.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('网易娱乐') > -1">
+											<a class="source_img" target="_blank" href="//ent.163.com/"><img src="//www.163.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//ent.163.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('网易科技') > -1">
+											<a class="source_img" target="_blank" href="//tech.163.com/"><img src="//www.163.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//tech.163.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('网易汽车') > -1">
+											<a class="source_img" target="_blank" href="//auto.163.com/"><img src="//www.163.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//auto.163.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('网易') > -1">
+											<a class="source_img" target="_blank" href="//www.163.com/"><img src="//www.163.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.163.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('央视网') > -1">
+											<a class="source_img" target="_blank" href="//www.cctv.com/"><img src="//www.cctv.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.cctv.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('央视新闻移动网') > -1">
+											<a class="source_img" target="_blank" href="//www.newscctv.net/"><img src="//www.newscctv.net/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.newscctv.net/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('央广网') > -1">
+											<a class="source_img" target="_blank" href="//www.cnr.cn/"><img src="//www.cnr.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.cnr.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('视觉中国') > -1">
+											<a class="source_img" target="_blank" href="//www.vcg.com/"><img src="//www.vcg.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.vcg.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('第一财经') > -1">
+											<a class="source_img" target="_blank" href="//www.yicai.com/"><img src="//www.yicai.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.yicai.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('海外网') > -1">
+											<a class="source_img" target="_blank" href="//www.haiwainet.cn/"><img src="//www.haiwainet.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.haiwainet.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('澎湃新闻') > -1">
+											<a class="source_img" target="_blank" href="//www.thepaper.cn/"><img src="//www.thepaper.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.thepaper.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('北京日报') > -1">
+											<a class="source_img" target="_blank" href="//www.bjd.com.cn/"><img src="//www.bjd.com.cn/images/logo.png"></a>
+											<a class="source_tit" target="_blank" href="//www.bjd.com.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('荆楚网') > -1">
+											<a class="source_img" target="_blank" href="//www.cnhubei.com/"><img src="//www.cnhubei.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.cnhubei.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('扬子晚报') > -1">
+											<a class="source_img" target="_blank" href="//www.yangtse.com/"><img src="//www.yangtse.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.yangtse.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('重庆晨报') > -1">
+											<a class="source_img" target="_blank" href="//www.cqcb.com/"><img src="//www.cqcb.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.cqcb.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('亿欧') > -1">
+											<a class="source_img" target="_blank" href="//www.iyiou.com/"><img src="//www.iyiou.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.iyiou.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('超能网') > -1">
+											<a class="source_img" target="_blank" href="//www.expreview.com/"><img src="//www.expreview.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.expreview.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('中国基金报') > -1">
+											<a class="source_img" target="_blank" href="//www.chnfund.com/"><img src="//www.chnfund.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.chnfund.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('新京报') > -1">
+											<a class="source_img" target="_blank" href="//www.bjnews.com.cn/"><img src="//www.bjnews.com.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.bjnews.com.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('财联社') > -1">
+											<a class="source_img" target="_blank" href="//www.cailianpress.com/"><img src="//admin.cailianpress.com/public/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.cailianpress.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('观点地产') > -1">
+											<a class="source_img" target="_blank" href="//www.guandian.cn/"><img src="//www.guandian.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.guandian.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('搜达足球') > -1">
+											<a class="source_img" target="_blank" href="//www.sodasoccer.com/"><img src="//www.sodasoccer.com/images/index/logo1.gif"></a>
+											<a class="source_tit" target="_blank" href="//www.sodasoccer.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('36氪') > -1">
+											<a class="source_img" target="_blank" href="//36kr.com/"><img src="//36kr.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//36kr.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('环球网') > -1">
+											<a class="source_img" target="_blank" href="//www.huanqiu.com/"><img src="//www.huanqiu.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.huanqiu.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('中国军网') > -1">
+											<a class="source_img" target="_blank" href="//www.81.cn/"><img src="//www.81.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.81.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('飞扬军事') > -1">
+											<a class="source_img" target="_blank" href="//www.fyjs.cn/"><img src="//www.fyjs.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.fyjs.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('科普中国') > -1">
+											<a class="source_img" target="_blank" href="//www.kepuchina.cn/"><img src="//www.kepuchina.cn/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.kepuchina.cn/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('Bianews') > -1">
+											<a class="source_img" target="_blank" href="//www.bianews.com/"><img src="//www.bianews.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.bianews.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('FreeBuf') > -1">
+											<a class="source_img" target="_blank" href="//www.freebuf.com/"><img src="//static.freebuf.com/images/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.freebuf.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('威锋网') > -1">
+											<a class="source_img" target="_blank" href="//www.feng.com/"><img src="//www.feng.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.feng.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('中新经纬') > -1">
+											<a class="source_img" target="_blank" href="//www.jwview.com/"><img src="//www.jwview.com/36/2017/0717/U703P902T36D2F524DT20180207155505.png"></a>
+											<a class="source_tit" target="_blank" href="//www.jwview.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('和讯网') > -1">
+											<a class="source_img" target="_blank" href="//www.hexun.com/"><img src="//www.hexun.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.hexun.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('IT之家') > -1">
+											<a class="source_img" target="_blank" href="//www.ithome.com/"><img src="//www.ithome.com/favicon.ico"></a>
+											<a class="source_tit" target="_blank" href="//www.ithome.com/">{{site.source}}</a>
+										</template>
+										<template v-else-if="site.source.indexOf('成都商报') > -1">
+											<a class="source_img" target="_blank" href="//www.cdsb.com/"><img src="//www.cdsb.com/Public/www/images/844569252297100216.png"></a>
+											<a class="source_tit" target="_blank" href="//www.cdsb.com/">{{site.source}}</a>
+										</template>
+										<template v-else>
+											<a class="source_tit" href="javascript:;">{{site.source}}</a>
+										</template>
+									</template>
+									<span>{{site.ptime}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="script/vue.min.js?v=2.5.17"></script>
+	<script src="layer/layer.js"></script>
+	<script src="script/script.js"></script>
+
+</html>
